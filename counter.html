@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stream Counter</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: rgba(0, 0, 0, 0);
+            color: white;
+            font-size: 3em;
+            font-family: Arial, sans-serif;
+        }
+        #counter, #label {
+            font-size: 4em;
+            color: red; /* Schriftfarbe auf rot setzen */
+        }
+        .container {
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="label">Tode: </div> <!-- Leerzeichen hinter dem Doppelpunkt -->
+        <div id="counter">0</div>
+    </div>
+
+    <script>
+        let counter = localStorage.getItem('counter') ? parseInt(localStorage.getItem('counter')) : 0;
+        const counterElement = document.getElementById('counter');
+
+        function updateCounter() {
+            counterElement.textContent = counter;
+            localStorage.setItem('counter', counter);
+        }
+
+        function increaseCounter() {
+            counter++;
+            updateCounter();
+        }
+
+        function decreaseCounter() {
+            counter--;
+            updateCounter();
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowUp') {
+                increaseCounter();
+            } else if (event.key === 'ArrowDown') {
+                decreaseCounter();
+            }
+        });
+
+        // Initialize counter on page load
+        updateCounter();
+    </script>
+</body>
+</html>
